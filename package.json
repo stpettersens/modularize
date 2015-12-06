@@ -1,0 +1,45 @@
+{
+  "name": "modularize",
+  "version": "0.0.1",
+  "description": "Simple utility to wrap JavaScript code into AMD modules.",
+  "main": "modularize-lib.js",
+  "bin": {
+    "modularize": "./modularize"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "build": "gulp",
+    "test": "echo !TODO"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stpettersens/modularize.git"
+  },
+  "keywords": [
+    "javascript",
+    "amd",
+    "module",
+    "generation",
+    "tool",
+    "utility"
+  ],
+  "author": "Sam Saint-Pettersen <s.stpettersen+github@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stpettersens/modularize/issues"
+  },
+  "homepage": "https://github.com/stpettersens/vue-component-compiler",
+  "devDependencies": {
+    "glob": "^6.0.1",
+    "gulp": "^3.9.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^2.9.2",
+    "mocha": "^2.3.4",
+    "should": "^7.1.1"
+  },
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "line-reader": "^0.3.0"
+  }
+}

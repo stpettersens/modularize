@@ -1,0 +1,6 @@
+*.ts
+*.json
+*.tgz
+Gulpfile.js
+.travis.yml
+
