@@ -1,13 +1,13 @@
 # modularize
 [![Build Status](https://travis-ci.org/stpettersens/modularize.png?branch=master)](https://travis-ci.org/stpettersens/modularize)
-[![npm version](https://badge.fury.io/js/modularize.svg)](http://npmjs.org/package/modularize)
+[![npm version](https://badge.fury.io/js/modularize-util.svg)](http://npmjs.org/package/modularize-util)
 [![Dependency Status](https://david-dm.org/stpettersens/modularize.png?theme=shields.io)](https://david-dm.org/stpettersens/modularize) [![Development Dependency Status](https://david-dm.org/stpettersens/modularize/dev-status.png?theme=shields.io)](https://david-dm.org/stpettersens/modularize#info=devDependencies)
 
 > :white_medium_square: Simple utility to wrap JavaScript code into AMD modules.
 
 ##### Install:
 
-`npm install -g modularize`
+`npm install -g modularize-util` for `modularize` command.
 
 ##### Usage: 
 
