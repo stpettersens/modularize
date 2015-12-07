@@ -7,5 +7,4 @@
 	Released under the MIT License.
 */
 import modularize = require('./modularize-lib');
-new modularize(process.argv[2], process.argv[3], process.argv[4]);
-
+new modularize(process.argv[2], process.argv[3], process.argv[4], process.argv[5]);

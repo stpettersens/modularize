@@ -8,11 +8,9 @@
 */
 
 /// <reference path="typings/node/node.d.ts" />
-/// <reference path="typings/line-reader/line-reader.d.ts" />
 /// <reference path="typings/chalk/chalk.d.ts" />
 
 import fs = require('fs');
-import lr = require('line-reader');
 import chalk = require('chalk');
 
 class Modularize {
@@ -22,6 +20,7 @@ class Modularize {
 	private verbose: boolean;
 	private dependencies: string[];
 	private input: string;
+	private output: string;
 
 	/**
 	 * Print an error message.
@@ -75,14 +74,15 @@ class Modularize {
 	private displayHelp(): void {
 		this.printInfo('Simple utility to wrap JavaScript code into AMD modules.');
 		this.printInfo(`Copyright 2015 Sam Saint-Pettersen ${this.hilight('[MIT License].')}`)
-		console.log(`\nUsage: ${this.embolden('modularize')} input [[\'dependency:symbol\']][-q|--quiet][-n|--no-colors]`);
+		console.log(`\nUsage: ${this.embolden('modularize')} input output [[\'dependency:symbol\']][-q|--quiet][-n|--no-colors]`);
 		console.log('[-h|--help|-v|--version]');
-		console.log('\n input              : JavaScript file to wrap as a module.');
-		console.log(' [\'dependency:symbol\']      : Array of dependency:symbol(s).');
-		console.log(' -q | --quiet       : Be less verbose (only error output).');
-		console.log(' -c | --no-colors   : Don\'t use colorful output.');
-		console.log(' -h | --help        : Display this usage information and exit.');
-		console.log(' -v | --version     : Display application version and exit.');
+		console.log('\n input                     : Input file to wrap as a module.');
+		console.log(' output                    : Output file wrapped as a module.');
+		console.log(' [\'dependency:symbol\']     : Array of dependency:symbol(s).');
+		console.log(' -q | --quiet              : Be less verbose (only error output).');
+		console.log(' -c | --no-colors          : Don\'t use colorful output.');
+		console.log(' -h | --help               : Display this usage information and exit.');
+		console.log(' -v | --version            : Display application version and exit.');
 	}
 
 	/**
@@ -98,7 +98,6 @@ class Modularize {
 	*/
 	private compile(): void {
 		let lines = new Array<string>();
-		let output: string = this.input;
 		let reqs = new Array<string>();
 		let syms = new Array<string>();
 
@@ -112,11 +111,14 @@ class Modularize {
 			return "'" + req + "'";
 		});
 
-		let content = fs.readFileSync(this.input, 'utf8');;
+		let content: string = fs.readFileSync(this.input, 'utf8');
 		lines = content.split('\n');
+		lines = lines.map(function(line: string) {
+			return '\t' + line;
+		})
 		lines.unshift(`require([${reqs.join(',')}], function(${syms.join(',')}) {`);
 		lines.push('});');
-		fs.writeFileSync('foo.txt', lines.join('\n'));
+		fs.writeFileSync(this.output, lines.join('\n'));
     }
 
     /**
@@ -125,13 +127,14 @@ class Modularize {
      * @param input JavaScript file to wrap as a module.
      * @param dependencies Array of dependencies for module. 
     */
-    constructor(input: string, dependencies: string, option?: string) {
+    constructor(input: string, output: string, dependencies: string, option?: string) {
 
 		this.version = '0.1';
 		this.colors = true;
 		this.verbose = true;
 		this.dependencies = new Array<string>();
 		this.input = input;
+		this.output = output;
 
 		if (option == '-q' || option == '--quiet')
 			this.verbose = false;
@@ -150,8 +153,15 @@ class Modularize {
 		else if(input == '-v' || input == '--version') {
 			this.displayVersion();
 		}
+
 		if(input == null || input.charAt(0) == '-') {
 			this.printError('Please specify a valid input file.\n');
+			this.displayHelp();
+			process.exit(1);
+		}
+
+		if(output == null || output.charAt(0) == '-') {
+			this.printError('Please specifiy an output file.\n');
 			this.displayHelp();
 			process.exit(1);
 		}
@@ -163,4 +173,3 @@ class Modularize {
 	}
 }
 export = Modularize;
-
