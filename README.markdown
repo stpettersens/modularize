@@ -27,4 +27,4 @@ Usage: modularize input output [['dependency:symbol']][-q|--quiet][-n|--no-color
 ##### Using Gulp or Grunt?
 
 :tropical_drink: [gulp-modularize](http://github.com/stpettersens/gulp-modularize)
-:boar: [grunt-vuecc](http://github.com/stpettersens/grunt-modularize)
+:boar: [grunt-modularize](http://github.com/stpettersens/grunt-modularize)
